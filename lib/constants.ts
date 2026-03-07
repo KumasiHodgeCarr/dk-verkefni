@@ -29,5 +29,6 @@ export const COMMENT_DEPTH_COLORS = [
 ] as const;
 
 // Reddit fetch config
-export const REDDIT_USER_AGENT = "dk-verkefni:1.0";
+// Use a more realistic browser User-Agent
+export const REDDIT_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
 export const REDDIT_CACHE_SECONDS = 300; // 5 minutes
