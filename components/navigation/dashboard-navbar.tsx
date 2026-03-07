@@ -1,10 +1,20 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import ThemeToggle from "./theme-toggle";
 
 interface NavLink {
@@ -13,24 +23,24 @@ interface NavLink {
   icon: ReactNode;
 }
 
-// Defined outside DashboardNav so React never remounts it between renders,
-// which would break the layoutId animation context
+// Desktop nav item with animated underline (YOUR MOTION IS BACK!)
 function NavItem({ link, pathname }: { link: NavLink; pathname: string }) {
+  const isActive = pathname === link.path;
+
   return (
-    <motion.li whileTap={{ scale: 0.95 }}>
+    <motion.li whileTap={{ scale: 0.95 }} className="relative">
       <Link
         href={link.path}
         className={cn(
-          "flex gap-1 flex-col items-center relative",
-          pathname === link.path && "text-primary",
+          "flex gap-1 flex-col items-center text-muted-foreground hover:text-foreground transition-colors",
+          isActive && "text-primary",
         )}
       >
-        {link.icon}
-        {link.label}
-        {/* Sliding underline — shared layoutId animates between active links */}
-        {pathname === link.path && (
+        <span className="w-5 h-5">{link.icon}</span>
+        <span className="text-xs font-semibold">{link.label}</span>
+        {isActive && (
           <motion.div
-            className="h-0.5 w-full rounded-full absolute bg-primary left-0 -bottom-1"
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
             layoutId="underline"
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
           />
@@ -40,26 +50,95 @@ function NavItem({ link, pathname }: { link: NavLink; pathname: string }) {
   );
 }
 
+// Mobile nav item with motion (YOUR MOTION IS BACK!)
+function MobileNavItem({
+  link,
+  pathname,
+  index,
+}: {
+  link: NavLink;
+  pathname: string;
+  index: number;
+}) {
+  const isActive = pathname === link.path;
+
+  return (
+    <motion.li
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.2, delay: index * 0.05 }}
+    >
+      <Link
+        href={link.path}
+        className={cn(
+          "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors w-full",
+          isActive
+            ? "bg-primary text-primary-foreground"
+            : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+        )}
+      >
+        <span className="w-5 h-5">{link.icon}</span>
+        <span className="font-medium">{link.label}</span>
+      </Link>
+    </motion.li>
+  );
+}
+
 export default function DashboardNav({
   leftLinks,
 }: {
   leftLinks: NavLink[];
-  rightLinks?: NavLink[];
+  rightContent?: ReactNode;
 }) {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="px-6 py-3 border-b border-border">
+    <nav className="px-4 md:px-6 py-3 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="flex items-center justify-between">
-        {/* Left side — primary nav links */}
-        <ul className="flex items-center justify-between text-xs font-semibold gap-6">
+        {/* Mobile hamburger button - using shadcn SheetTrigger */}
+        <div className="md:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Open navigation menu"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-72 p-0">
+              <SheetHeader className="border-b border-border px-4 py-4">
+                <SheetTitle className="text-left">Navigation</SheetTitle>
+              </SheetHeader>
+
+              <nav className="p-4">
+                <ul className="flex flex-col gap-1">
+                  {leftLinks.map((link, index) => (
+                    <div key={link.path} onClick={() => setOpen(false)}>
+                      <MobileNavItem
+                        link={link}
+                        pathname={pathname}
+                        index={index} // ← Pass index for staggered animation
+                      />
+                    </div>
+                  ))}
+                </ul>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        {/* Desktop navigation - with motion */}
+        <ul className="hidden md:flex items-center gap-6">
           {leftLinks.map((link) => (
             <NavItem key={link.path} link={link} pathname={pathname} />
           ))}
         </ul>
 
-        {/* Right side theme toggle */}
-        <div className="flex items-center ">
+        {/* Right side content */}
+        <div className="flex items-center gap-2">
           <ThemeToggle />
         </div>
       </div>

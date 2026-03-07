@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as React from "react";
 import { useTheme } from "next-themes";
@@ -63,11 +63,11 @@ const ThemeToggle = () => {
     },
   };
 
-  // Updated paths to ensure the moon is centered like the sun
   const sunPath =
     "M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z";
   const moonPath =
     "M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C44.5 39 49.5 60 70 49.5Z";
+
   return (
     <div className="flex items-center justify-center">
       <Button
@@ -75,31 +75,34 @@ const ThemeToggle = () => {
         onClick={() =>
           theme === "dark" ? setTheme("light") : setTheme("dark")
         }
+        className="border-border bg-background hover:bg-accent"
       >
         <m.svg
           strokeWidth="4"
           strokeLinecap="round"
-          width={200} // Increase size
-          height={200} // Increase size
+          width={200}
+          height={200}
           viewBox="0 0 100 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="relative"
-          style={{ transform: "scale(2)" }} // Scale up
+          style={{ transform: "scale(2)" }}
         >
+          {/* Shine effect for moon */}
           <m.path
             variants={shineVariant}
             d={moonPath}
-            className={"absolute top-0 left-0 stroke-blue-100 "}
+            className="absolute top-0 left-0 stroke-primary/30"
             initial="hidden"
             animate={theme === "dark" ? "visible" : "hidden"}
           />
 
+          {/* Sun rays */}
           <m.g
             variants={raysVariants}
             initial="hidden"
             animate={theme === "light" ? "visible" : "hidden"}
-            className="stroke-6 stroke-yellow-600 "
+            className="stroke-6 stroke-primary"
             style={{ strokeLinecap: "round" }}
           >
             <m.path
@@ -116,6 +119,7 @@ const ThemeToggle = () => {
             <m.path variants={rayVariant} d="M23 23L16 16" />
           </m.g>
 
+          {/* Main sun/moon shape */}
           <m.path
             d={sunPath}
             fill="transparent"
@@ -126,8 +130,8 @@ const ThemeToggle = () => {
                 ? {
                     d: moonPath,
                     rotate: -360,
-                    stroke: "var(--color-blue-400)",
-                    fill: "var(--color-purple)",
+                    stroke: "var(--themetoggle)",
+                    fill: "var(--themetoggle)",
                     fillOpacity: 0.35,
                     strokeOpacity: 1,
                     transition: { delay: 0.1 },
@@ -135,8 +139,8 @@ const ThemeToggle = () => {
                 : {
                     d: sunPath,
                     rotate: 0,
-                    stroke: "var(--color-gold)",
-                    fill: "var(--color-gold)",
+                    stroke: "var(--themetoggle)",
+                    fill: "var(--themetoggle)",
                     fillOpacity: 0.35,
                     strokeOpacity: 1,
                   }

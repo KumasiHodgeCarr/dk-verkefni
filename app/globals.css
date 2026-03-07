@@ -48,6 +48,7 @@
 }
 
 :root {
+  --themetoggle: oklch(0.8088 0.1455 99.53);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -83,6 +84,7 @@
 }
 
 .dark {
+  --themetoggle: oklch(0.623 0.214 259.815);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -130,26 +132,25 @@
 
 @layer components {
   .comment-1 {
-    @apply pl-4 border-l-2 border-blue-500/30;
+    @apply pl-4 border-l-2 border-primary/30;
   }
 
   .comment-2 {
-    @apply pl-4 border-l-2 border-blue-500/20;
+    @apply pl-4 border-l-2 border-primary/20;
   }
 
   .comment-3 {
-    @apply pl-4 border-l-2 border-blue-500/10;
+    @apply pl-4 border-l-2 border-primary/10;
   }
 
   .comment-4 {
-    @apply pl-4 border-l-2 border-blue-500/5;
+    @apply pl-4 border-l-2 border-primary/5;
   }
 
   .comment-5 {
-    @apply pl-4 border-l-2 border-blue-500/3;
+    @apply pl-4 border-l-2 border-primary/3;
   }
 }
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
