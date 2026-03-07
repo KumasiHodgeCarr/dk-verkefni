@@ -89,7 +89,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0.00 0);
+  --primary: oklch(0.87 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -114,6 +114,40 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .comment-1 {
+    @apply pl-4 border-l-2 border-blue-500/30;
+  }
+
+  .comment-2 {
+    @apply pl-4 border-l-2 border-blue-500/20;
+  }
+
+  .comment-3 {
+    @apply pl-4 border-l-2 border-blue-500/10;
+  }
+
+  .comment-4 {
+    @apply pl-4 border-l-2 border-blue-500/5;
+  }
+
+  .comment-5 {
+    @apply pl-4 border-l-2 border-blue-500/3;
+  }
 }
 
 @layer base {
