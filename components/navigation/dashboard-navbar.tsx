@@ -23,7 +23,7 @@ interface NavLink {
   icon: ReactNode;
 }
 
-// Desktop nav item with animated underline (YOUR MOTION IS BACK!)
+// Desktop nav item — defined outside DashboardNav to keep stable identity for layoutId
 function NavItem({ link, pathname }: { link: NavLink; pathname: string }) {
   const isActive = pathname === link.path;
 
@@ -50,15 +50,17 @@ function NavItem({ link, pathname }: { link: NavLink; pathname: string }) {
   );
 }
 
-// Mobile nav item with motion (YOUR MOTION IS BACK!)
+// Mobile nav item — staggered entrance animation via index
 function MobileNavItem({
   link,
   pathname,
   index,
+  onNavigate,
 }: {
   link: NavLink;
   pathname: string;
   index: number;
+  onNavigate: () => void;
 }) {
   const isActive = pathname === link.path;
 
@@ -70,6 +72,7 @@ function MobileNavItem({
     >
       <Link
         href={link.path}
+        onClick={onNavigate}
         className={cn(
           "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors w-full",
           isActive
@@ -94,7 +97,7 @@ export default function DashboardNav({
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="px-4 md:px-6 py-3 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <nav className="px-4 md:px-6 py-3 border-b border-border bg-background/95 backdrop-blur">
       <div className="flex items-center justify-between">
         {/* Mobile hamburger button - using shadcn SheetTrigger */}
         <div className="md:hidden">
@@ -116,13 +119,13 @@ export default function DashboardNav({
               <nav className="p-4">
                 <ul className="flex flex-col gap-1">
                   {leftLinks.map((link, index) => (
-                    <div key={link.path} onClick={() => setOpen(false)}>
-                      <MobileNavItem
-                        link={link}
-                        pathname={pathname}
-                        index={index} // ← Pass index for staggered animation
-                      />
-                    </div>
+                    <MobileNavItem
+                      key={link.path}
+                      link={link}
+                      pathname={pathname}
+                      index={index}
+                      onNavigate={() => setOpen(false)}
+                    />
                   ))}
                 </ul>
               </nav>
