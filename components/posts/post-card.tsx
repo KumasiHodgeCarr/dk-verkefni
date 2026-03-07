@@ -23,31 +23,35 @@ export function PostCard({ post, slug, index }: PostCardProps) {
       transition={{ duration: 0.4, delay: index * 0.1 }}
     >
       <Link href={`/post/${slug}`}>
-        <div>
+        <div className="border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-colors ">
           {/* Image */}
           {post.previewUrl && (
-            <div>
+            <div className="relative aspect-video bg-muted">
               <Image
                 src={post.previewUrl}
                 alt={post.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                width={600}
+                height={340}
+                className="object-cover"
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
           )}
 
           {/*  ? */}
-          <div>
-            <p>{post.subreddit}</p>
-            <h2>{post.title}</h2>
-            <div>
-              <span>
+          <div className="p-4 space-y-2">
+            <p className="text-xs text-muted-foreground">{post.subreddit}</p>
+            <h2 className="font-semibold text-sma leading leading-snug group-hover:text-primary transition-colors line-clamp-3">
+              {post.title}
+            </h2>
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1">
                 <ArrowUp size={12} /> {post.score}
               </span>
-              <span>
+              <span className="flex items-center gap-1">
                 <MessageSquare size={12} /> {post.numComments}
               </span>
-              <span>
+              <span className="flex items-center gap-1">
                 <Clock size={12} /> u/{post.author}
               </span>
             </div>
