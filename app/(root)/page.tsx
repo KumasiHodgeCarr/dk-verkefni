@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { fetchRedditPost } from "@/lib/reddit";
 import { REDDIT_POSTS, type PostSlug } from "@/lib/constants";
 import { PostCard } from "@/components/posts/post-card";
@@ -90,7 +92,7 @@ export default async function HomePage() {
       {/* Footer */}
       <footer className="border-t border-border pt-6 text-center">
         <p className="text-sm text-muted-foreground">
-          Data sourced from Reddit. Built for educational purposes.
+          Data sourced from Reddit.
         </p>
       </footer>
     </main>
