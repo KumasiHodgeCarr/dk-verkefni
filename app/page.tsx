@@ -78,7 +78,7 @@ export default async function HomePage() {
                 </div>
               </div>
               <Button
-                variant="outline"
+                variant="default"
                 className="gap-2 transition-all group-hover:bg-foreground group-hover:text-background"
               >
                 Explore Insights
