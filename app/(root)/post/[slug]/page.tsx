@@ -66,21 +66,15 @@ export default async function PostPage({ params }: Props) {
           </h2>
 
           {(() => {
+            const half = Math.ceil(comments.length / 2);
             const third = Math.ceil(comments.length / 3);
-            const firstCol = comments.slice(0, third);
-            const secondCol = comments.slice(third, third * 2);
-            const thirdCol = comments.slice(third * 2);
 
             return (
-              <div className="grid grid-cols-3 gap-6">
-                <div className="justify-self-start">
-                  <CommentTree comments={firstCol} />
-                </div>
-                <div className="justify-self-center">
-                  <CommentTree comments={secondCol} />
-                </div>
-                <div className="justify-self-end">
-                  <CommentTree comments={thirdCol} />
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <CommentTree comments={comments.slice(0, third)} />
+                <CommentTree comments={comments.slice(third, third * 2)} />
+                <div className="hidden xl:block">
+                  <CommentTree comments={comments.slice(half)} />
                 </div>
               </div>
             );

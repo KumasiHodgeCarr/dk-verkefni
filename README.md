@@ -20,7 +20,7 @@ Hýst á: [vercel.usainnsyni](https://vercel.usainnsyni.vercel.app)
 app/
   page.tsx           → Forsíða með Reddit færslur
   post/[slug]/       → Færslusíða með endurkvæmt athugasemdatré
-  innsyni/           → AI greining með kort og gröf
+  innsight/           → AI greining með kort og gröf
 components/
   insights/          → Gröf og heimskort (settu músina yfir)
   posts/             → PostCard, PostStats

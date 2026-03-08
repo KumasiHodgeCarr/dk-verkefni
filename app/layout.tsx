@@ -36,7 +36,7 @@ export default function RootLayout({
             leftLinks={[
               { label: "Home", path: "/", icon: <Home size={16} /> },
               {
-                label: "Innsyni",
+                label: "Insight",
                 path: "/innsyni",
                 icon: <BarChart2 size={16} />,
               },

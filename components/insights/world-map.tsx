@@ -76,7 +76,7 @@ export function WorldMap() {
       <div ref={containerRef} className="relative w-full">
         {svgContent ? (
           <div
-            className="w-full [&_svg]:w-full [&_svg]:h-auto"
+            className="w-full [&_svg]:w-full [&_svg]:h-auto [&_svg]:min-h-50 md:[&_svg]:min-h-0"
             dangerouslySetInnerHTML={{ __html: svgContent }}
           />
         ) : (
