@@ -13,7 +13,7 @@ const TABS: { key: InsightKey; label: string }[] = [
   { key: "escalationTrends", label: "Trends" },
 ];
 
-export function InsightPaner() {
+export function InsightPanel() {
   const [activeTab, setActiveTab] = useState<InsightKey>("persistentConflicts");
   const [displayedText, setDisplayedText] = useState("");
 
