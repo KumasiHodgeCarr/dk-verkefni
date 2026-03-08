@@ -4,16 +4,17 @@ import { REDDIT_USER_AGENT, REDDIT_CACHE_SECONDS } from "./constants";
 // Main entry point — fetches a Reddit post + its comments server-side.
 // Called from Server Components (no CORS issues, result is cached via Next.js fetch).
 export async function fetchRedditPost(url: string): Promise<RedditThread> {
-  // Use old.reddit.com — it's more permissive for server-side fetches than www.reddit.com
-  const normalised = url
-    .replace("www.reddit.com", "old.reddit.com")
-    .replace(/\/$/, "");
+  const normalised = url.replace(/\/$/, "");
   const jsonUrl = normalised.endsWith(".json") ? normalised : `${normalised}.json`;
 
   const response = await fetch(jsonUrl, {
     headers: {
       "User-Agent": REDDIT_USER_AGENT,
-      "Accept": "application/json",
+      "Accept": "application/json, text/html,*/*",
+      "Accept-Language": "en-US,en;q=0.9",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cache-Control": "no-cache",
+      "Pragma": "no-cache",
     },
     next: { revalidate: REDDIT_CACHE_SECONDS },
   });
