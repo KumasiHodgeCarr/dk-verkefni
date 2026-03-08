@@ -17,6 +17,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { INSIGHTS } from "@/lib/mock-insights";
+import { useScrollAnimation } from "@/components/hooks/use-scroll-animation";
 
 // Configure colors for each president (optional but nice!)
 const chartConfig = {
@@ -32,6 +33,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function PresidentChart() {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2, rootMargin: "0px 0px -150px 0px" });
   const data = [...INSIGHTS.presidentialPatterns.data];
 
   // Find min/max for trend text
@@ -45,7 +47,12 @@ export function PresidentChart() {
   );
 
   return (
-    <Card className="w-full">
+    <div
+      ref={ref}
+      className="transition-all duration-700 will-change-transform h-full"
+      style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(20px)" }}
+    >
+    <Card className="w-full h-full">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg font-semibold">
           Countries Targeted by President
@@ -115,7 +122,7 @@ export function PresidentChart() {
         </ChartContainer>
       </CardContent>
 
-      <CardFooter className="flex-col items-start gap-2 border-t pt-4 text-sm">
+      <CardFooter className="flex-col items-start gap-2 border-t pt-4 text-sm mt-auto">
         <div className="flex items-center gap-2 text-foreground">
           <TrendingUp className="h-4 w-4 text-destructive" />
           <span>
@@ -135,5 +142,6 @@ export function PresidentChart() {
         </p>
       </CardFooter>
     </Card>
+    </div>
   );
 }

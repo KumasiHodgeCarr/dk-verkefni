@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/chart";
 import { INSIGHTS } from "@/lib/mock-insights";
 import { useEffect, useState } from "react";
+import { useScrollAnimation } from "@/components/hooks/use-scroll-animation";
 
 const chartConfig = {
   count: {
@@ -63,9 +64,11 @@ const allRegions = [...INSIGHTS.regionalHotspots.data].sort(
 );
 
 export function RegionalBreakdown() {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2, rootMargin: "0px 0px -150px 0px" });
   const [revealedCount, setRevealedCount] = useState(1);
 
   useEffect(() => {
+    if (!isVisible) return;
     if (revealedCount >= allRegions.length) return;
 
     const timer = setTimeout(() => {
@@ -73,7 +76,7 @@ export function RegionalBreakdown() {
     }, 600);
 
     return () => clearTimeout(timer);
-  }, [revealedCount]);
+  }, [revealedCount, isVisible]);
 
   const visibleData = allRegions.slice(0, revealedCount);
   const visibleLabels: string[] = visibleData.map((item) => item.region);
@@ -84,7 +87,7 @@ export function RegionalBreakdown() {
   };
 
   return (
-    <Card className="border border-border rounded-xl">
+    <Card ref={ref} className="border border-border rounded-xl">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-semibold uppercase tracking-widest">
           Interventions by Region
@@ -120,10 +123,11 @@ export function RegionalBreakdown() {
           </PieChart>
         </ChartContainer>
         <ul className="mt-4 space-y-2">
-          {visibleData.map((entry) => (
+          {allRegions.map((entry, index) => (
             <li
               key={entry.region}
-              className="flex items-center justify-between text-sm"
+              className="flex items-center justify-between text-sm transition-opacity duration-300"
+              style={{ opacity: index < revealedCount ? 1 : 0 }}
             >
               <span className="flex items-center gap-2">
                 <span
