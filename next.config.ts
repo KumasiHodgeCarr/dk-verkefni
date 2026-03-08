@@ -3,10 +3,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      { hostname: "preview.redd.it" },  // Reddit preview thumbnails
-      { hostname: "i.redd.it" },        // Reddit direct image uploads
-      { hostname: "external-preview.redd.it" }, // Reddit external image previews
+      { hostname: "preview.redd.it" },
+      { hostname: "i.redd.it" },
+      { hostname: "external-preview.redd.it" },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "https://dk-verkefni.vercel.app" },
+        ],
+      },
+    ];
   },
 };
 
