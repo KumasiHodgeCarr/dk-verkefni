@@ -19,8 +19,8 @@ export function PostStats({ post }: PostStatsProps) {
   ];
 
   return (
-    <main className="container m-2 py-4 max-w-4xl">
-      <div className="grid grid-cols-4 gap-3 ">
+    <div className=" m-2 py-4 w-full">
+      <div className="grid grid-cols-4 gap-3 justify-items-center ">
         {stats.map(({ label, value }) => (
           <div key={label}>
             <p className="text-xs text-foreground">{label}</p>
@@ -28,6 +28,6 @@ export function PostStats({ post }: PostStatsProps) {
           </div>
         ))}
       </div>
-    </main>
+    </div>
   );
 }

@@ -75,7 +75,7 @@ const ThemeToggle = () => {
         onClick={() =>
           theme === "dark" ? setTheme("light") : setTheme("dark")
         }
-        className="border-border bg-background hover:bg-accent"
+        className="border-border bg-background hover:bg-accent p-6"
       >
         <m.svg
           strokeWidth="4"

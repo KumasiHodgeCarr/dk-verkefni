@@ -20,11 +20,12 @@ export default async function PostPage({ params }: Props) {
   const { post, comments } = await fetchRedditPost(REDDIT_POSTS[postSlug].url);
 
   return (
-    <main>
+    <main className=" space-y-2 px-4">
+      {/* back */}
       <div className="flex items-center gap-3 ">
         <Link
           href="/"
-          className="flex border m-2 p-2 items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="flex border p-1 items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft size={16} />
           Back
@@ -34,27 +35,63 @@ export default async function PostPage({ params }: Props) {
           r/{post.subreddit}
         </span>
       </div>
-
-      <h1 className="mx-2 text-2xl font-bold leading-snug mb-1">
-        {post.title}
-      </h1>
-      <p className="mx-2 text-sm text-muted-foreground mb-2">
-        posted by
-        <span className="text-foreground mx-1">{post.author}</span>
+      {/* Title + author */}
+      <h1 className="text-2xl font-bold leading-snug mb-1">{post.title}</h1>
+      <p className="text-sm text-muted-foreground ">
+        posted by <span className="text-foreground">{post.author}</span>
       </p>
 
+      {/* Stats */}
       <PostStats post={post} />
 
-      {post.previewUrl && (
-        <Image
-          src={post.previewUrl}
-          alt={post.title}
-          width={896}
-          height={504}
-          style={{ width: "100%", height: "auto" }}
-        />
-      )}
-      <CommentTree comments={comments} />
+      {/* Image + comments side by side */}
+      <div className="flex flex-col gap-6 items-start ">
+        {/* Full width image, fixed height */}
+        {post.previewUrl && (
+          <div className="relative w-full aspect-video mt-4 rounded-xl overflow-hidden">
+            <Image
+              src={post.previewUrl}
+              alt={post.title}
+              fill
+              style={{ objectFit: "contain", objectPosition: "center" }}
+            />
+          </div>
+        )}
+
+        {/* Comments in 3 columns with different positions */}
+        <div className="mt-6 w-full">
+          <h2 className="text-lg font-semibold mb-4 text-center">
+            {comments.length} Comments
+          </h2>
+
+          {/* Split comments into 3 parts */}
+          {(() => {
+            const third = Math.ceil(comments.length / 3);
+            const firstCol = comments.slice(0, third);
+            const secondCol = comments.slice(third, third * 2);
+            const thirdCol = comments.slice(third * 2);
+
+            return (
+              <div className="grid grid-cols-3 gap-6">
+                {/* Column 1 - Left aligned (START) */}
+                <div className="justify-self-start">
+                  <CommentTree comments={firstCol} />
+                </div>
+
+                {/* Column 2 - Center aligned */}
+                <div className="justify-self-center">
+                  <CommentTree comments={secondCol} />
+                </div>
+
+                {/* Column 3 - Right aligned (END) */}
+                <div className="justify-self-end">
+                  <CommentTree comments={thirdCol} />
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      </div>
     </main>
   );
 }

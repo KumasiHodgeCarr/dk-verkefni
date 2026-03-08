@@ -7,9 +7,8 @@ interface CommentTreeProps {
 
 export function CommentTree({ comments }: CommentTreeProps) {
   return (
-    <section className="mt-8">
-      <h2 className="text-lg font-semibold mb-4">{comments.length} Comments</h2>
-      <div className="space-y-1">
+    <section className="">
+      <div className="">
         {comments.map((comment) => (
           <CommentNode key={comment.id} comment={comment} depth={0} />
         ))}

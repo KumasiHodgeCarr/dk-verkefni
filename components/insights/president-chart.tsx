@@ -45,92 +45,94 @@ export function PresidentChart() {
   );
 
   return (
-    <Card>
-      <CardFooter>
-        <CardHeader>
-          <CardTitle>Countries Targeted by President</CardTitle>
-          <CardDescription>
-            Number of countries with US military actions per administration
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig} className="">
-            <BarChart
-              data={data}
-              layout="vertical"
-              margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
-            >
-              <CartesianGrid horizontal={false} className="stroke-muted" />
+    <Card className="w-full">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg font-semibold">
+          Countries Targeted by President
+        </CardTitle>
+        <CardDescription>
+          Number of countries with US military actions per administration
+        </CardDescription>
+      </CardHeader>
 
-              {/* X-Axis (numbers) */}
-              <XAxis
-                type="number"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                className="text-xs fill-muted-foreground"
-              />
+      <CardContent className="pb-4">
+        <ChartContainer config={chartConfig} className="w-full h-50">
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
+          >
+            <CartesianGrid horizontal={false} className="stroke-muted/30" />
 
-              {/* Y-Axis (president names) */}
-              <YAxis
-                type="category"
-                dataKey="president"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                className="text-sm fill-foreground font-medium"
-                width={70}
-              />
+            <XAxis
+              type="number"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              className="text-xs fill-muted-foreground"
+            />
 
-              {/* Tooltip with shadcn styling */}
-              <ChartTooltip
-                cursor={{ fill: "hsl(var(--muted))", opacity: 0.2 }}
-                content={
-                  <ChartTooltipContent
-                    indicator="line"
-                    className="w-45"
-                    formatter={(value, name, props) => (
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="h-2 w-2 rounded-full"
-                          style={{
-                            backgroundColor: chartConfig.countries.color,
-                          }}
-                        />
-                        {name}  
-                        <span className="font-medium">
-                          {value} {value === 1 ? "country" : "countries"}
-                        </span>
-                      </div>
-                    )}
-                  />
-                }
-              />
+            <YAxis
+              type="category"
+              dataKey="president"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              className="text-sm fill-foreground font-medium"
+              width={60}
+            />
 
-              {/* The actual bars */}
-              <Bar
-                dataKey="countries"
-                fill="var(--color-countries)"
-                radius={[0, 4, 4, 0]}
-                barSize={20}
-              />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
+            <ChartTooltip
+              cursor={{ fill: "hsl(var(--muted))", opacity: 0.3 }}
+              content={
+                <ChartTooltipContent
+                  indicator="line"
+                  formatter={(value, name) => (
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="h-2.5 w-2.5 shrink-0 rounded-full"
+                        style={{
+                          backgroundColor: chartConfig.countries.color,
+                        }}
+                      />
+                      <span className="text-muted-foreground">{name}:</span>
+                      <span className="font-semibold tabular-nums">
+                        {value} {value === 1 ? "country" : "countries"}
+                      </span>
+                    </div>
+                  )}
+                />
+              }
+            />
 
-        <CardFooter>
-          <div>
-            {maxPresident.president}targeted the most countries (
-            {maxPresident.countries})
-          </div>
-          <TrendingUp />
-          <div>
-            {minPresident.president} targeted the fewest (
-            {minPresident.countries})
-          </div>
-        </CardFooter>
-        <TrendingDown />
-        <div>Based on Reddit discussions about 21st century interventions</div>
+            <Bar
+              dataKey="countries"
+              fill="var(--color-countries)"
+              radius={[0, 4, 4, 0]}
+              barSize={24}
+            />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+
+      <CardFooter className="flex-col items-start gap-2 border-t pt-4 text-sm">
+        <div className="flex items-center gap-2 text-foreground">
+          <TrendingUp className="h-4 w-4 text-destructive" />
+          <span>
+            <span className="font-medium">{maxPresident.president}</span>{" "}
+            targeted the most countries ({maxPresident.countries})
+          </span>
+        </div>
+        <div className="flex items-center gap-2 text-foreground">
+          <TrendingDown className="h-4 w-4 text-primary" />
+          <span>
+            <span className="font-medium">{minPresident.president}</span>{" "}
+            targeted the fewest ({minPresident.countries})
+          </span>
+        </div>
+        <p className="text-xs text-muted-foreground pt-1">
+          Based on Reddit discussions about 21st century interventions
+        </p>
       </CardFooter>
     </Card>
   );

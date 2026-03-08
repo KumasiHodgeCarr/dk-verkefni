@@ -5,6 +5,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* usa colors */
+  --color-brand-blue: oklch(0.623 0.214 259.815); /* Vibrant blue */
+  --color-brand-red: oklch(0.704 0.191 22.216); /* Rich red */
+  --color-brand-amber: oklch(0.769 0.188 70.08); /* Warm amber */
+  --color-brand-green: oklch(0.627 0.194 149.214); /* Fresh green */
+  --color-brand-purple: oklch(0.558 0.288 302.321); /* Deep purple */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);

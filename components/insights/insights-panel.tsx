@@ -4,7 +4,8 @@
 
 import { useState, useEffect } from "react";
 import { INSIGHTS, type InsightKey } from "@/lib/mock-insights";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const TABS: { key: InsightKey; label: string }[] = [
   { key: "persistentConflicts", label: "Persistent Conflicts" },
@@ -32,21 +33,30 @@ export function InsightPanel() {
   }, [activeTab, fullText]);
 
   return (
-    <div>
-      {/* Tab buttons */}
-      <div>
-        {TABS.map(({ key, label }) => (
-          <button key={key} onClick={() => setActiveTab(key)} className="">
-            {label}
-          </button>
-        ))}
-      </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>AI Insights</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Tabs
+          value={activeTab}
+          onValueChange={(v) => setActiveTab(v as InsightKey)}
+        >
+          <TabsList className="mb-4 w-full">
+            {TABS.map(({ key, label }) => (
+              <TabsTrigger key={key} value={key} className="">
+                {label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-      {/* Type Text */}
-      <p>
-        {displayedText}
-        <span>|</span>
-      </p>
-    </div>
+          {/* Type Text */}
+          <p className="text-sm leading-relaxed min-h-20">
+            {displayedText}
+            <span>|</span>
+          </p>
+        </Tabs>
+      </CardContent>
+    </Card>
   );
 }
