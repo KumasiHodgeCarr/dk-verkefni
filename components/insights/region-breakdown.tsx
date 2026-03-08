@@ -12,51 +12,11 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
 import { INSIGHTS } from "@/lib/mock-insights";
 import { useEffect, useState } from "react";
 import { useScrollAnimation } from "@/components/hooks/use-scroll-animation";
-
-const chartConfig = {
-  count: {
-    label: "Interventions",
-    color: "transparent",
-  },
-  "Middle East": {
-    label: "Middle East",
-    color: "var(--color-brand-amber)",
-  },
-  Asia: {
-    label: "Asia",
-    color: "var(--color-brand-red)",
-  },
-  Africa: {
-    label: "Africa",
-    color: "var(--color-brand-green)",
-  },
-  Europe: {
-    label: "Europe",
-    color: "var(--color-brand-purple)",
-  },
-  Americas: {
-    label: "Americas",
-    color: "var(--color-brand-blue)",
-  },
-  "Latin America": {
-    label: "Latin America",
-    color: "var(--color-brand-amber)",
-  },
-} satisfies ChartConfig;
-
-const regionColorMap = Object.fromEntries(
-  Object.entries(chartConfig)
-    .filter(
-      (entry): entry is [string, { label: string; color: string }] =>
-        "color" in entry[1],
-    )
-    .map(([, value]) => [value.label, value.color]),
-);
+import { REGION_CHART_CONFIG, regionColorMap } from "@/lib/brand-colors";
 
 // Sort smallest to biggest outside the component (stable, no re-sort on render)
 const allRegions = [...INSIGHTS.regionalHotspots.data].sort(
@@ -98,7 +58,7 @@ export function RegionalBreakdown() {
       </CardHeader>
       <CardContent>
         <ChartContainer
-          config={chartConfig}
+          config={REGION_CHART_CONFIG}
           className="mx-auto aspect-square max-h-70"
         >
           <PieChart>

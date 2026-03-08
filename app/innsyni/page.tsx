@@ -23,7 +23,6 @@ export default function InnsynPage() {
         className={`${VIEWPORT} snap-start flex flex-col justify-center`}
       >
         <div className="container mx-auto max-w-4xl px-4 space-y-6">
-          <h1 className="text-3xl font-bold">AI Insights</h1>
           <Suspense fallback={<InnsyniPageSkeleton />}>
             <InsightPanel />
             <ConflictTimeline />
@@ -35,9 +34,9 @@ export default function InnsynPage() {
       <section
         className={`${VIEWPORT} snap-start flex flex-col justify-center`}
       >
-        <div className="container mx-auto max-w-4xl px-4">
+        <div className="w-full px-6">
           <Suspense fallback={<WorldMapSkeleton />}>
-            <ScrollReveal animation="blur" threshold={0.1} delay={420}>
+            <ScrollReveal animation="blur" threshold={0.1} delay={520}>
               <WorldMap />
             </ScrollReveal>
           </Suspense>

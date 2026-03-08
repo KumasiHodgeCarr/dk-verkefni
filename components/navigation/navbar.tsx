@@ -138,7 +138,7 @@ export default function DashboardNav({ leftLinks }: { leftLinks: NavLink[] }) {
         </Link>
 
         {/* Desktop navigation */}
-        <ul className="hidden items-center gap-2 md:flex">
+        <ul className="hidden items-center  md:flex">
           {leftLinks.map((link) => (
             <NavItem key={link.path} link={link} pathname={pathname} />
           ))}

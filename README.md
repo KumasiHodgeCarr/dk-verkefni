@@ -1,6 +1,7 @@
 # Conflict Lens
 
-Verkefni sem greinir bandarískar hernaðarlegar íhlutanir í gegnum Reddit umræður og gervigreind.
+Verkefni sem greinir bandarískar árasir
+gegnum Reddit umræður og gervigreind.
 
 Hýst á: [vercel.usainnsyni](https://vercel.usainnsyni.vercel.app)
 
@@ -9,8 +10,9 @@ Hýst á: [vercel.usainnsyni](https://vercel.usainnsyni.vercel.app)
 - **Next.js 16** — App Router, Server Components, ISR
 - **TypeScript** — Fullur týpuöryggur
 - **Tailwind CSS + shadcn/ui** — Þema og UI
-- **Recharts** — Gagnvirkir gröf
+- **Recharts** — Gagnvirki
 - **Reddit API** — Rauntíma gögn með 5 mín cache
+- **SHADCN** - Útlit
 
 ## Uppbygging
 
@@ -20,7 +22,7 @@ app/
   post/[slug]/       → Færslusíða með endurkvæmt athugasemdatré
   innsyni/           → AI greining með kort og gröf
 components/
-  insights/          → Gröf og heimskort
+  insights/          → Gröf og heimskort (settu músina yfir)
   posts/             → PostCard, PostStats
   comments/          → Endurkvæmt CommentNode
 lib/
@@ -38,4 +40,4 @@ npm run dev
 
 ---
 
-Þakka þér kærlega fyrir skemmtilegt og spennandi verkefni, DK! 🙏
+Þakka ykkurfyrir skemmtilegt og spennandi verkefni DK! 🙏

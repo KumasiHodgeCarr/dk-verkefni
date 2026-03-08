@@ -23,11 +23,9 @@ export default async function HomePage() {
   }));
 
   return (
-    <main className="space-y-8 md:space-y-10 px-4">
-      {/* Hero Section */}
-      {/* Hero Section with subtle background */}
+    <main className="space-y-8 md:space-y-10">
+      {/* Hero */}
       <section className="relative py-4 space-y-4 text-center md:space-y-6 m-0 overflow-hidden">
-        {/* Subtle gradient background */}
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
 
         <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-primary/80 text-background shadow-lg md:size-16">
@@ -46,8 +44,8 @@ export default async function HomePage() {
 
       {/* Posts Grid */}
       <section className="space-y-4">
-        <div className="flex flex-col  items-start justify-between">
-          <h2 className="text-lg font-semibold md:text-xl ">Featured Posts</h2>
+        <div className="flex flex-col items-start justify-between">
+          <h2 className="text-lg font-semibold md:text-xl">Featured Posts</h2>
           <span className="text-sm text-muted-foreground">
             {posts.length} discussions
           </span>
