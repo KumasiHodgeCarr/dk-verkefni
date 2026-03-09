@@ -8,14 +8,7 @@ export async function fetchRedditPost(url: string): Promise<RedditThread> {
   const jsonUrl = normalised.endsWith(".json") ? normalised : `${normalised}.json`;
 
   const response = await fetch(jsonUrl, {
-    headers: {
-      "User-Agent": REDDIT_USER_AGENT,
-      "Accept": "application/json, text/html,*/*",
-      "Accept-Language": "en-US,en;q=0.9",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Cache-Control": "no-cache",
-      "Pragma": "no-cache",
-    },
+    headers: { "User-Agent": REDDIT_USER_AGENT },
     next: { revalidate: REDDIT_CACHE_SECONDS },
   });
 

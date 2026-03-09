@@ -8,16 +8,6 @@ const nextConfig: NextConfig = {
       { hostname: "external-preview.redd.it" },
     ],
   },
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          { key: "Access-Control-Allow-Origin", value: "https://dk-verkefni.vercel.app" },
-        ],
-      },
-    ];
-  },
 };
 
 export default nextConfig;
