@@ -24,7 +24,10 @@ const allRegions = [...INSIGHTS.regionalHotspots.data].sort(
 );
 
 export function RegionalBreakdown() {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2, rootMargin: "0px 0px -150px 0px" });
+  const { ref, isVisible } = useScrollAnimation({
+    threshold: 0.2,
+    rootMargin: "0px 0px -150px 0px",
+  });
   const [revealedCount, setRevealedCount] = useState(1);
 
   useEffect(() => {
@@ -41,7 +44,10 @@ export function RegionalBreakdown() {
   const visibleData = allRegions.slice(0, revealedCount);
   const visibleLabels: string[] = visibleData.map((item) => item.region);
 
-  const renderLabel = (entry: { payload: { region: string }; percent: number }) => {
+  const renderLabel = (entry: {
+    payload: { region: string };
+    percent: number;
+  }) => {
     if (!visibleLabels.includes(entry.payload.region)) return null;
     return `${entry.payload.region} ${(entry.percent * 100).toFixed(0)}%`;
   };
@@ -59,7 +65,7 @@ export function RegionalBreakdown() {
       <CardContent>
         <ChartContainer
           config={REGION_CHART_CONFIG}
-          className="mx-auto aspect-square max-h-70"
+          className="w-full aspect-square"
         >
           <PieChart>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
@@ -69,7 +75,8 @@ export function RegionalBreakdown() {
               nameKey="region"
               cx="50%"
               cy="50%"
-              outerRadius={80}
+              // max if not it cuts
+              outerRadius="58%"
               label={renderLabel}
               labelLine={false}
             >

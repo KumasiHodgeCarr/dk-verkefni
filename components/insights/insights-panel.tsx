@@ -42,7 +42,7 @@ export function InsightPanel() {
           value={activeTab}
           onValueChange={(v) => setActiveTab(v as InsightKey)}
         >
-          <TabsList className="mb-4 w-full">
+          <TabsList className="mb-4 w-full h-auto flex-wrap gap-y-1">
             {TABS.map(({ key, label }) => (
               <TabsTrigger key={key} value={key} className="">
                 {label}
