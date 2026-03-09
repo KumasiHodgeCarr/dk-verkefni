@@ -53,7 +53,7 @@ export function RegionalBreakdown() {
   };
 
   return (
-    <Card ref={ref} className="border border-border rounded-xl">
+    <Card ref={ref} className="border border-border rounded-xl h-full">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-semibold uppercase tracking-widest">
           Interventions by Region
@@ -65,7 +65,7 @@ export function RegionalBreakdown() {
       <CardContent>
         <ChartContainer
           config={REGION_CHART_CONFIG}
-          className="w-full aspect-square"
+          className="w-full aspect-square max-h-80"
         >
           <PieChart>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />

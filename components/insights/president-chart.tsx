@@ -62,8 +62,8 @@ export function PresidentChart() {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="pb-4 flex-1 min-h-0">
-        <ChartContainer config={chartConfig} className="w-full h-full">
+      <CardContent className="pb-4">
+        <ChartContainer config={chartConfig} className="w-full h-64">
           <BarChart
             data={data}
             layout="vertical"
