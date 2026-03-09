@@ -28,7 +28,7 @@ export default function InnsynPage() {
       <section>
         <div className="w-full px-4 md:px-6">
           <Suspense fallback={<WorldMapSkeleton />}>
-            <ScrollReveal animation="blur" threshold={0.2} delay={880}>
+            <ScrollReveal animation="scale" threshold={0.4} delay={1000}>
               <WorldMap />
             </ScrollReveal>
           </Suspense>
@@ -40,10 +40,20 @@ export default function InnsynPage() {
         <div className="container mx-auto max-w-4xl px-4">
           <Suspense fallback={<ChartsGridSkeleton />}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:grid-rows-[600px]">
-              <ScrollReveal animation="fade-right" threshold={0.4} delay={200} className="h-full">
+              <ScrollReveal
+                animation="fade-right"
+                threshold={0.4}
+                delay={420}
+                className="h-full"
+              >
                 <PresidentChart />
               </ScrollReveal>
-              <ScrollReveal animation="fade-left" threshold={0.4} delay={400} className="h-full">
+              <ScrollReveal
+                animation="fade-left"
+                threshold={0.4}
+                delay={840}
+                className="h-full"
+              >
                 <RegionalBreakdown />
               </ScrollReveal>
             </div>
