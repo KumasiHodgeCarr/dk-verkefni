@@ -3,7 +3,7 @@
 Verkefni sem greinir bandarískar árasir
 gegnum Reddit umræður og gervigreind.
 
-Hýst á: [vercel.usainnsyni](https://vercel.usainnsyni.vercel.app)
+Hýst á: [cloudflare](https://dk-verkefni.kumasiplay.workers.dev/)
 
 ## Tækni
 
