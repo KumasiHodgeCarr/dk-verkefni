@@ -8,7 +8,7 @@ Hýst á: [cloudflare](https://dk-verkefni.kumasiplay.workers.dev/)
 ## Tækni
 
 - **Next.js 16** — App Router, Server Components, ISR
-- **TypeScript** — Fullur týpuöryggur
+- **TypeScript** — Fullur týpuöryggi
 - **Tailwind CSS + shadcn/ui** — Þema og UI
 - **Recharts** — Gagnvirki
 - **Reddit API** — Rauntíma gögn með 5 mín cache
